@@ -1,0 +1,32 @@
+version: 2.1
+workflows:
+  test-deploy:
+    jobs:
+      - build
+jobs:
+  build:
+    docker:
+      - image: node:16.10.0
+      - image: circleci/postgres:11-alpine-ram
+        environment:
+          POSTGRES_USER: ${POSTGRES_USER}
+          POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+          POSTGRES_DB: ${POSTGRES_DB}
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      # run tests!
+      - run: yarn test
+      - run: yarn test:e2e

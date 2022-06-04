@@ -18,7 +18,10 @@
     "test:watch": "cross-env NODE_ENV=testing jest --watch",
     "test:cov": "cross-env NODE_ENV=testing jest --coverage",
     "test:debug": "cross-env NODE_ENV=testing node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "cross-env NODE_ENV=testing jest --config ./test/jest-e2e.json"
+    "test:e2e": "cross-env NODE_ENV=testing jest --config ./test/jest-e2e.json --detectOpenHandles --runInBand",
+    "ci:docker": "npm run docker:build && npm run docker:login && npm run docker:push",
+    "docker:build": "docker build -t pablowolf96/schedule-maker:latest .",
+    "docker:login": "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
