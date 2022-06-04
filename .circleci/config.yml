@@ -6,8 +6,8 @@ workflows:
 jobs:
   build:
     docker:
-      - image: node:16.10.0
-      - image: circleci/postgres:11-alpine-ram
+      - image: cimg/node:18.2.0
+      - image: cimg/postgres:14.2.0
         environment:
           POSTGRES_USER: ${POSTGRES_USER}
           POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
