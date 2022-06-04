@@ -30,7 +30,7 @@ jobs:
       # run tests!
       - run: yarn test
       - run:
-        name: end to end test
+          name: end to end test
           command: yarn test:e2e
           environment:
             DATABASE_URL: postgres://postgres:postgres@localhost:5432/testdb
