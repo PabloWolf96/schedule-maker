@@ -9,9 +9,9 @@ jobs:
       - image: cimg/node:18.2.0
       - image: cimg/postgres:14.2
         environment:
-          POSTGRES_USER: $POSTGRES_USER
-          POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-          POSTGRES_DB: $POSTGRES_DB
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: schedule-maker-test
 
     steps:
       - checkout
@@ -33,4 +33,4 @@ jobs:
           name: end to end test
           command: yarn test:e2e
           environment:
-            DATABASE_URL: postgres://postgres:postgres@localhost:5432/testdb
+            DATABASE_URL: postgres://postgres:postgres@localhost:5432/schedule-maker-test
