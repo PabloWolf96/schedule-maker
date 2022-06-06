@@ -20,7 +20,7 @@ import { UsersModule } from './users/users.module';
         type: 'postgres',
         url: configService.get<string>('DATABASE_URL'),
         autoLoadEntities: true,
-        synchronize: process.env.NODE_ENV !== 'production',
+        synchronize: true,
       }),
     }),
   ],
