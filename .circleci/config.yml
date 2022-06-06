@@ -1,8 +1,14 @@
 version: 2.1
+orbs:
+  heroku: circleci/heroku@1.2.6
+
 workflows:
-  test-deploy:
+  heroku-deploy:
     jobs:
       - build
+      - heroku/deploy-via-git:
+          requires:
+            - build
 jobs:
   build:
     docker:
@@ -34,11 +40,3 @@ jobs:
           command: yarn test:e2e
           environment:
             DATABASE_URL: postgres://postgres:postgres@localhost:5432/schedule-maker-test
-      - run:
-          name: Build and push Docker image to Heroku
-          command: |
-            set -x
-            sudo curl https://cli-assets.heroku.com/install.sh | sh
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a pablo-schedule-maker web
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a pablo-schedule-maker web
