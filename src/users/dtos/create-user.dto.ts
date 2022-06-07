@@ -21,4 +21,8 @@ export class CreateUserDto {
   passwordConfirmation: string;
   @IsEmail()
   email: string;
+  @IsString()
+  firstName: string;
+  @IsString()
+  lastName: string;
 }
