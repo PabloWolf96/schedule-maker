@@ -1,13 +1,16 @@
+import { Transform } from 'class-transformer';
 import {
   IsEmail,
+  IsNotEmpty,
   IsString,
   Matches,
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { Match } from '../decorators/match.decorator';
+import { Match } from '../../common/decorators';
 
 export class CreateUserDto {
+  @Transform(({ value }) => value.toLowerCase())
   @IsString()
   @MinLength(3)
   @MaxLength(20)
@@ -19,10 +22,13 @@ export class CreateUserDto {
   password: string;
   @Match('password')
   passwordConfirmation: string;
+  @Transform(({ value }) => value.toLowerCase())
   @IsEmail()
   email: string;
+  @IsNotEmpty()
   @IsString()
   firstName: string;
+  @IsNotEmpty()
   @IsString()
   lastName: string;
 }
