@@ -20,4 +20,5 @@ model User {
   isActive  Boolean  @default(false)
   firstName String
   lastName  String
+  hashedRT  String?
 }
