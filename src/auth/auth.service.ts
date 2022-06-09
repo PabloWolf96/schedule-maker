@@ -10,4 +10,5 @@ export class AuthService {
     user.password = passwordHash;
     return this.usersService.add(user);
   }
+  // ToDo: add password validation
 }
