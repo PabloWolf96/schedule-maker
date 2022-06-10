@@ -28,9 +28,11 @@ export class AuthController {
     try {
       return this.authService.signupLocal(createUserDto);
     } catch (error) {
-      if (error.code === 'P2002') {
-        console.error(error);
-        throw new ConflictException('User already exists');
+      if (error.code === 'email_exists') {
+        throw new ConflictException('Email already exists');
+      }
+      if (error.code === 'username_exists') {
+        throw new ConflictException('Username already exists');
       }
     }
   }

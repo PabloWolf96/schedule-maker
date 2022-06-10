@@ -5,6 +5,10 @@ import * as argon from 'argon2';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { AuthDto } from './dtos';
+import {
+  DuplicateEmailError,
+  DuplicateUsernameError,
+} from '../common/errors/errors';
 @Injectable()
 export class AuthService {
   constructor(
@@ -14,6 +18,17 @@ export class AuthService {
   ) {}
   // Create User
   async signupLocal(user: CreateUserDto) {
+    const prevUserByEmail = await this.usersService.findByEmail(user.email);
+    if (prevUserByEmail) {
+      throw DuplicateEmailError;
+    }
+    const prevUserByUsername = await this.usersService.findByUsername(
+      user.username,
+    );
+    if (prevUserByUsername) {
+      throw DuplicateUsernameError;
+    }
+
     const passwordHash = await argon.hash(user.password);
     user.password = passwordHash;
     const newUser = await this.usersService.add(user);

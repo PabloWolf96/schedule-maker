@@ -40,4 +40,9 @@ export class UsersService {
       where: { id },
     });
   }
+  findByUsername(username: string) {
+    return this.prisma.user.findUnique({
+      where: { username },
+    });
+  }
 }
