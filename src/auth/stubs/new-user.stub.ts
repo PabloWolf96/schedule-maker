@@ -2,7 +2,7 @@ import { User } from '@prisma/client';
 import { userStub } from './user.stub';
 const {
   id,
-  password,
+  hashedPassword,
   email,
   username,
   hashedRT,
@@ -15,7 +15,7 @@ const {
 export const newUserStub = (): User => {
   return {
     id,
-    password,
+    password: hashedPassword,
     email,
     username,
     hashedRT,
