@@ -6,17 +6,18 @@ import {
 } from '../../common/errors/errors';
 import { AuthController } from '../auth.controller';
 import { AuthService } from '../auth.service';
+import { AuthServiceMock } from '../mocks/auth-service.mock';
 import { createUserStub, tokenStub, userDetailsStub } from '../stubs';
 import { authDtoStub } from '../stubs/auth-dto.stub';
 import { Tokens, UserDetails } from '../types';
-jest.mock('../auth.service');
+
 describe('AuthController', () => {
   let authController: AuthController;
   let authService: AuthService;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AuthController],
-      providers: [AuthService],
+      providers: [{ provide: AuthService, useClass: AuthServiceMock }],
     }).compile();
     authController = module.get<AuthController>(AuthController);
     authService = module.get<AuthService>(AuthService);

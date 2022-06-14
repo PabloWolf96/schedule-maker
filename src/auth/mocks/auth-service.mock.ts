@@ -1,6 +1,6 @@
 import { userDetailsStub, tokenStub } from '../stubs';
 
-export const AuthService = jest.fn().mockReturnValue({
+export const AuthServiceMock = jest.fn().mockReturnValue({
   signupLocal: jest.fn().mockResolvedValue(userDetailsStub()),
   signinLocal: jest.fn().mockResolvedValue(tokenStub()),
   logout: jest.fn(),

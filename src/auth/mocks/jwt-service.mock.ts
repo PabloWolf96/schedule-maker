@@ -1,4 +1,4 @@
-export class JwtService {
+export class JwtServiceMock {
   signAsync(payload: any, options: any): Promise<string> {
     if (options.secret == 'JWT_SECRET') {
       return Promise.resolve('access_token');
