@@ -1,9 +1,14 @@
-import { userDetailsStub } from './user-details.stub';
-const { access_token, refresh_token, ...createUser } = userDetailsStub();
-export const createUserStub = () => {
+import { CreateUserDto } from '../dtos';
+import { userStub } from './user.stub';
+const { username, email, password, passwordConfirmation, firstName, lastName } =
+  userStub();
+export const createUserStub = (): CreateUserDto => {
   return {
-    ...createUser,
-    password: 'password',
-    passwordConfirmation: 'password',
+    username,
+    email,
+    password,
+    passwordConfirmation,
+    firstName,
+    lastName,
   };
 };

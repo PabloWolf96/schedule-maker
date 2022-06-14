@@ -1,8 +1,10 @@
 import { Tokens } from '../types';
+import { userStub } from './user.stub';
+const { access_token, refresh_token } = userStub();
 
 export const tokenStub = (): Tokens => {
   return {
-    access_token: 'access_token',
-    refresh_token: 'refresh_token',
+    refresh_token,
+    access_token,
   };
 };

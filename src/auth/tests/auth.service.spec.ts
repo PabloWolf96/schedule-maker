@@ -31,14 +31,29 @@ describe('AuthService', () => {
   describe('signupLocal', () => {
     describe('when it is called', () => {
       let response: UserDetails;
+      let spy1: jest.SpyInstance;
+      let spy2: jest.SpyInstance;
 
       beforeEach(async () => {
+        spy1 = jest.spyOn(usersService, 'findByEmail').mockResolvedValue(null);
+        spy2 = jest
+          .spyOn(usersService, 'findByUsername')
+          .mockResolvedValue(null);
         response = await authService.signupLocal(createUserStub());
+      });
+      afterEach(() => {
+        spy1.mockRestore();
+        spy2.mockRestore();
       });
 
       it('should call findByEmail', () => {
         expect(usersService.findByEmail).toHaveBeenCalledWith(
           createUserStub().email,
+        );
+      });
+      it('should call findByUsername', () => {
+        expect(usersService.findByUsername).toHaveBeenCalledWith(
+          createUserStub().username,
         );
       });
     });
