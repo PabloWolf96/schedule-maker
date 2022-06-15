@@ -7,8 +7,7 @@ import {
 import { AuthController } from '../auth.controller';
 import { AuthService } from '../auth.service';
 import { AuthServiceMock } from '../mocks/auth-service.mock';
-import { createUserStub, tokenStub, userDetailsStub } from '../stubs';
-import { authDtoStub } from '../stubs/auth-dto.stub';
+import { createUserStub, tokenStub, userDetailsStub, authStub } from '../stubs';
 import { Tokens, UserDetails } from '../types';
 
 describe('AuthController', () => {
@@ -73,10 +72,10 @@ describe('AuthController', () => {
     describe('when signinLocal is called', () => {
       let signinResponse: Tokens;
       beforeEach(async () => {
-        signinResponse = await authController.signinLocal(authDtoStub());
+        signinResponse = await authController.signinLocal(authStub());
       });
       it('should call authService', () => {
-        expect(authService.signinLocal).toHaveBeenCalledWith(authDtoStub());
+        expect(authService.signinLocal).toHaveBeenCalledWith(authStub());
       });
       it('should return tokens', () => {
         expect(signinResponse).toEqual(tokenStub());
@@ -93,7 +92,7 @@ describe('AuthController', () => {
         mockedFn.mockRestore();
       });
       it('throws a forbidden exception', async () => {
-        await expect(authController.signinLocal(authDtoStub())).rejects.toThrow(
+        await expect(authController.signinLocal(authStub())).rejects.toThrow(
           ForbiddenException,
         );
       });
