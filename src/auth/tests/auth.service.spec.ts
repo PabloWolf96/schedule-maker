@@ -69,6 +69,9 @@ describe('AuthService', () => {
           createUserStub().username,
         );
       });
+      it('should call add', () => {
+        expect(usersService.add).toHaveBeenCalled();
+      });
       it('should return an object with id, email, username, firstName, lastName, isActive, access_token, refresh_token', () => {
         expect(response).toEqual({
           id: expect.any(String),
