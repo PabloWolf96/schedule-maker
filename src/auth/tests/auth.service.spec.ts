@@ -5,9 +5,7 @@ import { DuplicateEmailError } from '../../common/errors/errors';
 import { DuplicateUsernameError } from '../../common/errors/errors';
 import { UsersService } from '../../users/users.service';
 import { AuthService } from '../auth.service';
-import { ConfigServiceMock } from '../mocks/config-service.mock';
-import { JwtServiceMock } from '../mocks/jwt-service.mock';
-import { UsersServiceMock } from '../mocks/users-service.mock';
+import { UsersServiceMock, JwtServiceMock, ConfigServiceMock } from '../mocks';
 import {
   createUserStub,
   authStub,
