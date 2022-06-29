@@ -7,7 +7,6 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { Match } from '../../common/decorators';
 
 export class CreateUserDto {
   @Transform(({ value }) => value.toLowerCase())
@@ -20,8 +19,6 @@ export class CreateUserDto {
     message: 'password too weak',
   })
   password: string;
-  @Match('password')
-  passwordConfirmation: string;
   @Transform(({ value }) => value.toLowerCase())
   @IsEmail()
   email: string;

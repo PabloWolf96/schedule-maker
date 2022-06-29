@@ -2,7 +2,6 @@ export const userStub = () => {
   return {
     email: 'ikhena.owen@gmail.com',
     password: 'PASSword123!!',
-    passwordConfirmation: 'PASSword123!!',
     id: 'd4edd3e2-6989-4767-a3c8-002e30fe36a6',
     username: 'pablowolf',
     isActive: false,
