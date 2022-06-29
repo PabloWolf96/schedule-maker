@@ -9,7 +9,6 @@ import {
   DuplicateEmailError,
   DuplicateUsernameError,
 } from '../common/errors/errors';
-import { User } from '@prisma/client';
 @Injectable()
 export class AuthService {
   constructor(
@@ -34,9 +33,8 @@ export class AuthService {
 
     const passwordHash = await argon.hash(createUserDto.password);
     createUserDto.password = passwordHash;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { passwordConfirmation, ...user } = createUserDto;
-    const newUser = await this.usersService.add(user as User);
+
+    const newUser = await this.usersService.add(createUserDto);
     const tokens = await this.getTokens(newUser.id, newUser.email);
     await this.updateRefreshTokenHash(newUser.id, tokens.refresh_token);
     return {
